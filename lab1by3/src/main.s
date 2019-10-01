@@ -17,7 +17,7 @@ do_sort:
 		sub r1,#1
 		ldr r2,=#0
 		cmp r1,#1
-		bgt inner
+		bge inner
 		bx lr
 		inner:
 			ldrb r3,[r0,r2]

@@ -552,9 +552,9 @@ OUTPUT(lab1by3.elf elf32-littlearm)
  .debug_aranges
                 0x0000000000000020       0x28 startup/startup_stm32.o
 
-.debug_str      0x0000000000000000       0x69
- .debug_str     0x0000000000000000       0x4e src/main.o
- .debug_str     0x000000000000004e       0x1b startup/startup_stm32.o
+.debug_str      0x0000000000000000       0xaa
+ .debug_str     0x0000000000000000       0x5d src/main.o
+ .debug_str     0x000000000000005d       0x4d startup/startup_stm32.o
                                          0x5b (size before relaxing)
 
 .debug_ranges   0x0000000000000000       0x20
