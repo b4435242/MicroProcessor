@@ -2,8 +2,8 @@
 	result: .byte 0
 .text
 	.global main
-	.equ X, 0x5500
-	.equ Y, 0x0000
+	.equ X, 0x1234
+	.equ Y, 0x4567
 
 hamm:
 	//TODO

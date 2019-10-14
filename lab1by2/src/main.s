@@ -3,7 +3,7 @@
 	.thumb
 .text
 .global main
-.equ N,10
+.equ N,-3
 fib:
 	cmp r0, #101
 	bge return
@@ -40,5 +40,5 @@ main:
 	movs r0, #N
 
 	bl fib
-	mov r0,1
+	//mov r0,1
 L: b L
