@@ -6,13 +6,15 @@
    result: .word  0
    max_size:  .word  0
 .text
-   m: .word  0x5E //94
-   n: .word  0x60 //96
+   m: .word  0x27 //94
+   n: .word  0x41 //96
    .global main
  main:
  	ldr r0, m
 	ldr r1, n
-	push {r0, r1} //stack bottom->m->n
+	push {r0, r1} //stack bottom->n->m
+	add r5,#2
+	mov r7, #0
 	mov r6, #0
 	mov r5, #0
 	bl GCD
@@ -20,11 +22,13 @@
 	ldr r0, =result
 	ldr r1, =max_size
 	str r4, [r0]
-	str r5, [r1]
+	str r7, [r1]
 L:B L
 GCD:
 	pop {r0, r1} //r1=n, r0=m
+	sub r5,#2
 	push {lr}
+	add r5,#1 //stack size ++
 	// if m == n, return m
 	cmp r1, r0
 	beq return_m
@@ -79,7 +83,16 @@ m_odd_n_even:
 	b recursive
 recursive:
 	push {r0, r1}
+	add r5, r5, #2 //stack size ++
+	cmp r5,r7
+	bgt stacksize_update
+	b end
+
+	stacksize_update:
+		mov r7,r5
+		b end
+	end:
 	bl GCD
-	add r5, r5, #1 //stack size ++
 	pop {lr}
+	sub r5,#1
 	bx lr
