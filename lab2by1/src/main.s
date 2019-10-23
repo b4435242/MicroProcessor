@@ -66,7 +66,7 @@ sub_op:
 	b function
 
 atoi:
-	//TODO: implement a “convert string to integer” function BX LR
+	//TODO: implement a �onvert string to integer�� function BX LR
 	sub r2,#48
 	mov r4,r2
 	b endcheck
