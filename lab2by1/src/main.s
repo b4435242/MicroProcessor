@@ -8,7 +8,7 @@
 
 .text
 .global main
-	postfix_expr: .asciz "1 -1 + " //"-100 10 20 + - 10 +"//
+	postfix_expr: .asciz  "1         -1 1 -1 1 -1 + + + + +   "//
 
 main:
 	LDR R0, =postfix_expr
