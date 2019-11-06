@@ -22,7 +22,8 @@ main:
 	LDR R0,=leds
 	STRB R1, [R0]
 	mov r3,#0
-	mov r4,#1
+	mov r11,#1
+	//push {r10}
 	mov r7,#1
 Loop:
 	//TODO: Write the display pattern into leds variable
@@ -31,7 +32,7 @@ Loop:
 	BL Delay
 	B Loop
 
-Check:
+/*Check:
 	mov r6,#0
 	Pool:
 		ldr r1,[r8]
@@ -60,7 +61,43 @@ Check:
 				bx lr
 		Reset:
 				mov r6,#0
-				b Pool
+				b Pool*/
+
+Check:
+	mov r6,#0
+	mov r5,#0
+	Pool:
+		ldr r1,[r8]
+		mov r0,#1
+		lsl r0,#13
+		and r1,r0
+		cmp r1,#0
+		it eq
+		addeq r6,#1
+		cmp r1,#0
+		it ne
+		subne r6,#1
+
+		add r5,#1
+		cmp r5,#100
+		blt Pool
+
+		cmp r6,#100
+		it eq
+		moveq r10,#0
+		cmp r6,#-100
+		it eq
+		moveq r10,#1
+
+		//pop {r0}
+		//push {r10}
+		sub r0,r11,r10
+		cmp r0,#1
+		it eq
+		eoreq r7,#1
+		mov r11,r10
+
+		bx lr
 
 GPIO_init:
 	//TODO: Initial LED GPIO pins as output BX LR
@@ -98,6 +135,7 @@ DisplayLED:
 	eor r1,#0xFF
 	cmp r7,#0
 	beq StopMoving
+	mov r4,#1
 	cmp r3,#4
 	blt shiftleft
 	//b shiftright
